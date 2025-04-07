@@ -16,9 +16,10 @@ class NewsCategoryDetail {
       category: json['category'],
       timestamp: json['timestamp'],
       read: json['read'],
-      clusters: (json['clusters'] as List)
-          .map((item) => NewsCluster.fromJson(item))
-          .toList(),
+      clusters:
+          (json['clusters'] as List)
+              .map((item) => NewsCluster.fromJson(item))
+              .toList(),
     );
   }
 
@@ -80,9 +81,10 @@ class NewsCluster {
       quoteSourceUrl: json['quote_source_url'],
       quoteSourceDomain: json['quote_source_domain'],
       location: json['location'],
-      perspectives: (json['perspectives'] as List)
-          .map((item) => NewsPerspective.fromJson(item))
-          .toList(),
+      perspectives:
+          (json['perspectives'] as List)
+              .map((item) => NewsPerspective.fromJson(item))
+              .toList(),
     );
   }
 
@@ -110,17 +112,15 @@ class NewsPerspective {
   final String text;
   final List<NewsSource> sources;
 
-  NewsPerspective({
-    required this.text,
-    required this.sources,
-  });
+  NewsPerspective({required this.text, required this.sources});
 
   factory NewsPerspective.fromJson(Map<String, dynamic> json) {
     return NewsPerspective(
       text: json['text'],
-      sources: (json['sources'] as List)
-          .map((item) => NewsSource.fromJson(item))
-          .toList(),
+      sources:
+          (json['sources'] as List)
+              .map((item) => NewsSource.fromJson(item))
+              .toList(),
     );
   }
 
@@ -136,22 +136,13 @@ class NewsSource {
   final String name;
   final String url;
 
-  NewsSource({
-    required this.name,
-    required this.url,
-  });
+  NewsSource({required this.name, required this.url});
 
   factory NewsSource.fromJson(Map<String, dynamic> json) {
-    return NewsSource(
-      name: json['name'],
-      url: json['url'],
-    );
+    return NewsSource(name: json['name'], url: json['url']);
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'url': url,
-    };
+    return {'name': name, 'url': url};
   }
 }
