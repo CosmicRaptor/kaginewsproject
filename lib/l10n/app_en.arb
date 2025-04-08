@@ -1,5 +1,8 @@
 {
   "appName": "Kagi News App",
   "appNameShort": "Kagi News",
-  "errorOccured": "An error occurred"
+  "errorOccured": "An error occurred",
+  "waiting": "Waiting for the server to respond",
+  "readMore": "Read more",
+  "readLess": "Read less"
 }

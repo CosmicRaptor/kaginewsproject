@@ -2,12 +2,18 @@
   "es": [
     "appName",
     "appNameShort",
-    "errorOccured"
+    "errorOccured",
+    "waiting",
+    "readMore",
+    "readLess"
   ],
 
   "hi": [
     "appName",
     "appNameShort",
-    "errorOccured"
+    "errorOccured",
+    "waiting",
+    "readMore",
+    "readLess"
   ]
 }

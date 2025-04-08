@@ -124,7 +124,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               children: List.generate(data.categories.length, (index) {
                 if (!_loadedTabs.contains(index)) {
                   // Placeholder before tab is visited
-                  return const Center(child: Text("Waiting..."));
+                  return Center(child: Text("${l10n.waiting}..."));
                 }
 
                 final categoryName = data.categories[index].file.replaceAll(

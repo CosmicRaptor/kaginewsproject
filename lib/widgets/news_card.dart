@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
 import 'package:kaginewsproject/widgets/quote_text.dart';
 
@@ -22,6 +23,7 @@ class _NewsCardState extends State<NewsCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       children: [
         SizedBox(
@@ -70,7 +72,7 @@ class _NewsCardState extends State<NewsCard> {
                             splashFactory: NoSplash.splashFactory,
                           ),
                           child: Text(
-                            'Read ${isQuoteVisible ? 'less' : 'more'}...',
+                            '${isQuoteVisible ? l10n.readLess : l10n.readMore}...',
                             style: TextStyle(color: Colors.grey[400]),
                           ),
                         ),
