@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
+import 'package:kaginewsproject/widgets/news_card.dart';
 import '../providers/api_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -14,18 +16,43 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     with TickerProviderStateMixin {
   TabController? _tabController;
   final Set<int> _loadedTabs = {};
+  final scrollController = ScrollController();
 
   @override
   void dispose() {
     _tabController?.dispose();
+    scrollController.removeListener(_handleScrollHaptics);
+    scrollController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(_handleScrollHaptics);
+  }
+
+  void _handleScrollHaptics() {
+    if (!scrollController.hasClients) return;
+
+    final position = scrollController.position;
+
+    if (position.pixels <= position.minScrollExtent && !position.outOfRange) {
+      HapticFeedback.lightImpact(); // Top reached
+    } else if (position.pixels >= position.maxScrollExtent &&
+        !position.outOfRange) {
+      HapticFeedback.heavyImpact(); // Bottom reached
+    }
   }
 
   void _initTabController(int length) {
     _tabController?.dispose();
     _tabController = TabController(length: length, vsync: this);
     _tabController!.addListener(() {
-      if (_tabController!.indexIsChanging) return;
+      if (_tabController!.indexIsChanging) {
+        HapticFeedback.selectionClick();
+        return;
+      }
 
       final currentIndex = _tabController!.index;
       if (!_loadedTabs.contains(currentIndex)) {
@@ -83,6 +110,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   bottom: TabBar(
                     isScrollable: true,
                     controller: _tabController,
+                    tabAlignment: TabAlignment.start,
                     tabs:
                         data.categories
                             .map((category) => Tab(text: category.name))
@@ -113,12 +141,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   error: (e, _) => Center(child: Text(l10n.errorOccured)),
                   data: (detail) {
                     return ListView(
+                      controller: scrollController,
                       padding: const EdgeInsets.all(16),
                       children:
                           detail.clusters.map((cluster) {
-                            return Text(
-                              cluster.title,
-                            ); // Replace with your custom UI
+                            return NewsCard(newsCluster: cluster);
                           }).toList(),
                     );
                   },

@@ -48,6 +48,8 @@ class NewsCluster {
   final String quoteSourceDomain;
   final String location;
   final List<NewsPerspective> perspectives;
+  final List<NewsArticle> articles;
+  final List<NewsDomains> domains;
 
   NewsCluster({
     required this.clusterNumber,
@@ -64,6 +66,8 @@ class NewsCluster {
     required this.quoteSourceDomain,
     required this.location,
     required this.perspectives,
+    required this.articles,
+    required this.domains,
   });
 
   factory NewsCluster.fromJson(Map<String, dynamic> json) {
@@ -85,6 +89,14 @@ class NewsCluster {
           (json['perspectives'] as List)
               .map((item) => NewsPerspective.fromJson(item))
               .toList(),
+      articles:
+          (json['articles'] as List)
+              .map((item) => NewsArticle.fromJson(item))
+              .toList(),
+      domains:
+          (json['domains'] as List)
+              .map((item) => NewsDomains.fromJson(item))
+              .toList(),
     );
   }
 
@@ -104,6 +116,8 @@ class NewsCluster {
       'quote_source_domain': quoteSourceDomain,
       'location': location,
       'perspectives': perspectives.map((item) => item.toJson()).toList(),
+      'articles': articles.map((item) => item.toJson()).toList(),
+      'domains': domains.map((item) => item.toJson()).toList(),
     };
   }
 }
@@ -144,5 +158,60 @@ class NewsSource {
 
   Map<String, dynamic> toJson() {
     return {'name': name, 'url': url};
+  }
+}
+
+class NewsArticle {
+  final String title;
+  final String link;
+  final String domain;
+  final DateTime date;
+  final String image;
+  final String imageCaption;
+
+  NewsArticle({
+    required this.title,
+    required this.link,
+    required this.domain,
+    required this.date,
+    required this.image,
+    required this.imageCaption,
+  });
+
+  factory NewsArticle.fromJson(Map<String, dynamic> json) {
+    return NewsArticle(
+      title: json['title'],
+      link: json['link'],
+      domain: json['domain'],
+      date: DateTime.parse(json['date']),
+      image: json['image'],
+      imageCaption: json['image_caption'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'link': link,
+      'domain': domain,
+      'date': date.toIso8601String(),
+      'image': image,
+      'image_caption': imageCaption,
+    };
+  }
+}
+
+class NewsDomains {
+  final String name;
+  final String favicon;
+
+  NewsDomains({required this.name, required this.favicon});
+
+  factory NewsDomains.fromJson(Map<String, dynamic> json) {
+    return NewsDomains(name: json['name'], favicon: json['favicon']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'name': name, 'favicon': favicon};
   }
 }
