@@ -1,11 +1,13 @@
 {
   "es": [
     "appName",
-    "helloWorld"
+    "appNameShort",
+    "errorOccured"
   ],
 
   "hi": [
     "appName",
-    "helloWorld"
+    "appNameShort",
+    "errorOccured"
   ]
 }
