@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/widgets/news_card.dart';
+import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
 import '../providers/api_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -72,7 +73,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final categoriesAsync = ref.watch(categoriesProvider);
 
     return categoriesAsync.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const ShimmerLoaderHomeScreen(loadAppBar: true),
       error:
           (error, stacktrace) => Center(
             child: Text(
@@ -107,6 +108,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   title: Text(l10n.appNameShort),
                   pinned: true,
                   floating: true,
+                  snap: true,
                   bottom: TabBar(
                     isScrollable: true,
                     controller: _tabController,
@@ -124,7 +126,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               children: List.generate(data.categories.length, (index) {
                 if (!_loadedTabs.contains(index)) {
                   // Placeholder before tab is visited
-                  return Center(child: Text("${l10n.waiting}..."));
+                  return ShimmerLoaderHomeScreen(loadAppBar: false);
                 }
 
                 final categoryName = data.categories[index].file.replaceAll(
@@ -137,7 +139,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
                 return categoryAsync.when(
                   loading:
-                      () => const Center(child: CircularProgressIndicator()),
+                      () => const ShimmerLoaderHomeScreen(loadAppBar: false),
                   error: (e, _) => Center(child: Text(l10n.errorOccured)),
                   data: (detail) {
                     return ListView(
