@@ -5,7 +5,9 @@
     "errorOccured",
     "waiting",
     "readMore",
-    "readLess"
+    "readLess",
+    "highlights",
+    "news"
   ],
 
   "hi": [
@@ -14,6 +16,8 @@
     "errorOccured",
     "waiting",
     "readMore",
-    "readLess"
+    "readLess",
+    "highlights",
+    "news"
   ]
 }

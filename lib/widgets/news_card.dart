@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
-import 'package:kaginewsproject/util/shimmer_effects.dart';
-import 'package:kaginewsproject/widgets/quote_text.dart';
 import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
 
 class NewsCard extends StatefulWidget {
@@ -34,34 +33,11 @@ class _NewsCardState extends State<NewsCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (widget.newsCluster.articles[0].image.isNotEmpty)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image.network(
-                    loadingBuilder: (
-                      BuildContext context,
-                      Widget child,
-                      ImageChunkEvent? loadingProgress,
-                    ) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
-                      return Shimmer(
-                        linearGradient: shimmerGradient,
-                        child: ShimmerLoading(
-                          isLoading: true,
-                          child: shimmerBox(
-                            width: double.infinity,
-                            height: 200,
-                          ),
-                        ),
-                      );
-                    },
-                    widget.newsCluster.articles[0].image,
-                    semanticLabel: widget.newsCluster.articles[0].imageCaption,
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
+                imageShimmer(
+                  width: double.infinity,
+                  height: 200,
+                  imgUrl: widget.newsCluster.articles[0].image,
+                  imgCaption: widget.newsCluster.articles[0].imageCaption,
                 ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
@@ -75,16 +51,13 @@ class _NewsCardState extends State<NewsCard> {
                     const SizedBox(height: 15),
                     Text(widget.newsCluster.title),
                     // const SizedBox(height: 5),
-                    if (isQuoteVisible)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: QuoteText(cluster: widget.newsCluster),
-                      ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          onPressed: toggleQuoteVisibility,
+                          onPressed: () {
+                            context.push('/news/', extra: widget.newsCluster);
+                          },
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
                             minimumSize: Size(0, 0),
@@ -93,7 +66,7 @@ class _NewsCardState extends State<NewsCard> {
                             splashFactory: NoSplash.splashFactory,
                           ),
                           child: Text(
-                            '${isQuoteVisible ? l10n.readLess : l10n.readMore}...',
+                            '${l10n.readMore}...',
                             style: TextStyle(color: Colors.grey[400]),
                           ),
                         ),

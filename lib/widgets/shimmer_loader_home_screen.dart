@@ -61,3 +61,31 @@ Widget shimmerBox({required double width, required double height}) {
     ),
   );
 }
+
+Widget imageShimmer({
+  required double width,
+  required double height,
+  required String imgUrl,
+  String? imgCaption,
+}) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(10),
+    child: Image.network(
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Shimmer(
+          linearGradient: shimmerGradient,
+          child: ShimmerLoading(
+            isLoading: true,
+            child: shimmerBox(width: width, height: height),
+          ),
+        );
+      },
+      imgUrl,
+      semanticLabel: imgCaption,
+      fit: BoxFit.cover,
+      width: width,
+      height: height,
+    ),
+  );
+}
