@@ -99,10 +99,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     child: SizedBox(
                       width: 5,
                       height: 5,
-                      child: Image.asset(
-                        'assets/kite.png',
-                        fit: BoxFit.fill,
-                      ),
+                      child: Image.asset('assets/kite.png', fit: BoxFit.fill),
                     ),
                   ),
                   title: Text(l10n.appNameShort),
@@ -126,7 +123,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               children: List.generate(data.categories.length, (index) {
                 if (!_loadedTabs.contains(index)) {
                   // Placeholder before tab is visited
-                  return ShimmerLoaderHomeScreen(loadAppBar: false);
+                  return Container();
                 }
 
                 final categoryName = data.categories[index].file.replaceAll(

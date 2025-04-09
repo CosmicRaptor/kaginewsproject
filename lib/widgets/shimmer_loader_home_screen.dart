@@ -9,17 +9,6 @@ class ShimmerLoaderHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    Widget shimmerBox({required double width, required double height}) {
-      return Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(10),
-        ),
-      );
-    }
-
     Widget shimmerCardBlock() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,4 +49,15 @@ class ShimmerLoaderHomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget shimmerBox({required double width, required double height}) {
+  return Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      color: Colors.grey[300],
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
 }

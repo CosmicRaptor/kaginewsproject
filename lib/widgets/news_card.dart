@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
+import 'package:kaginewsproject/util/shimmer_effects.dart';
 import 'package:kaginewsproject/widgets/quote_text.dart';
+import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
 
 class NewsCard extends StatefulWidget {
   final NewsCluster newsCluster;
@@ -35,6 +37,25 @@ class _NewsCardState extends State<NewsCard> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: Image.network(
+                    loadingBuilder: (
+                      BuildContext context,
+                      Widget child,
+                      ImageChunkEvent? loadingProgress,
+                    ) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Shimmer(
+                        linearGradient: shimmerGradient,
+                        child: ShimmerLoading(
+                          isLoading: true,
+                          child: shimmerBox(
+                            width: double.infinity,
+                            height: 200,
+                          ),
+                        ),
+                      );
+                    },
                     widget.newsCluster.articles[0].image,
                     semanticLabel: widget.newsCluster.articles[0].imageCaption,
                     width: double.infinity,
