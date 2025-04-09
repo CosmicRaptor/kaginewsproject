@@ -100,7 +100,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       width: 5,
                       height: 5,
                       child: Image.asset(
-                        'assets/kagi_logo_yellow.png',
+                        'assets/kite.png',
                         fit: BoxFit.fill,
                       ),
                     ),

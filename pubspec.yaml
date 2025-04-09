@@ -41,6 +41,7 @@ dependencies:
   intl: any
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
   flutter_test:
     sdk: flutter
 
@@ -66,6 +67,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/kagi_logo_yellow.png
+    - assets/kite.png
+    - assets/kite-monochrome.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
