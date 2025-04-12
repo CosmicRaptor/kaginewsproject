@@ -46,6 +46,32 @@ Some Guidelines
 
 https://github.com/user-attachments/assets/392669d8-6352-445a-ba53-f849105a59c4
 
+### 12 April 2025
+- News screen UI mostly completed
+- Lazy loading implemented for all tabs
+- Automatic dark and light themes implemented
+- Following sections are implemented:
+![image](https://github.com/user-attachments/assets/6c2f3fa8-25d2-44f1-85f4-714e00f4b2c9)
+
+
+https://github.com/user-attachments/assets/7fd05ae1-315b-4e95-8974-840aed73cccf
+
+### What's left:
+- Finishing the remaining sections, labelled as "others" in the website.
+- Improving the UI
+- Making a settings page to let users change the categories they wish to see, currently all are shown.
+- Creating an onboarding page.
+- Caching news for offline viewing
+- Writing unit tests
+- Some documentation
+
+### USPs planned:
+- Push notifications whenever new articles come out
+- WearOS integration
+
+
+
+
 
 
 
