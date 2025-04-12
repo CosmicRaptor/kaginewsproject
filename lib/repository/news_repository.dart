@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
-
 import '../models/categories_model.dart';
 
 class NewsRepository {
@@ -13,7 +11,7 @@ class NewsRepository {
 
     if (response.statusCode == 200) {
       return CategoryData.fromJson(
-        jsonDecode(response.body) as Map<String, dynamic>,
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
       );
     } else {
       throw Exception('Failed to load categories');
@@ -27,7 +25,7 @@ class NewsRepository {
 
     if (response.statusCode == 200) {
       return NewsCategoryDetail.fromJson(
-        jsonDecode(response.body) as Map<String, dynamic>,
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
       );
     } else {
       throw Exception('Failed to load category');

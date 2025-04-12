@@ -31,7 +31,14 @@ class BulletPoint extends StatelessWidget {
           decoration: BoxDecoration(color: bulletColor, shape: BoxShape.circle),
         ),
         SizedBox(width: spacing),
-        Expanded(child: Text(text, style: style)),
+        Expanded(
+          child: Text(
+            text,
+            style: (style ?? DefaultTextStyle.of(context).style).copyWith(
+              fontFamilyFallback: ['Noto Color Emoji'],
+            ),
+          ),
+        ),
       ],
     );
   }

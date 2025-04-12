@@ -45,24 +45,25 @@ class NewsScreen extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 // Location
-                Row(
-                  children: [
-                    // Location icon
-                    Icon(
-                      Icons.location_on_outlined,
-                      size: 16,
-                      color: Colors.grey[600],
-                    ),
-                    Text(
-                      cluster.location,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
+                if (cluster.location.isNotEmpty)
+                  Row(
+                    children: [
+                      // Location icon
+                      Icon(
+                        Icons.location_on_outlined,
+                        size: 16,
                         color: Colors.grey[600],
                       ),
-                    ),
-                  ],
-                ),
+                      Text(
+                        cluster.location,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ),
                 const SizedBox(height: 24),
 
                 // Primary Image
@@ -187,8 +188,184 @@ class NewsScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // Geopolitical context
-                // if (cluster)
+                // Historical background
+                if (cluster.historicalBackground.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.historicalBackground,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        cluster.historicalBackground,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+
+                const SizedBox(height: 16),
+
+                // Humanitarian impact
+                if (cluster.humanitarianImpact.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.humanitarianImpact,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        cluster.humanitarianImpact,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+
+                const SizedBox(height: 16),
+
+                // Technical details
+                if (cluster.technicalDetails.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.technicalDetails,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ...cluster.technicalDetails.map((techDetail) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BulletPoint(
+                                text: techDetail.trim(),
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                bulletSize: 8,
+                                bulletColor:
+                                    Theme.of(context).colorScheme.primary,
+                                spacing: 8,
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+
+                // Business angle
+                if (cluster.businessAngleText.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.businessAngle,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        cluster.businessAngleText,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
+
+                // Business angle points
+                if (cluster.businessAnglePoints.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.businessAngle,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ...cluster.businessAnglePoints.map((businessAngle) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BulletPoint(
+                                text: businessAngle.trim(),
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                bulletSize: 8,
+                                bulletColor:
+                                    Theme.of(context).colorScheme.primary,
+                                spacing: 8,
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+
+                // International reactions
+                if (cluster.internationalReactions.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.internationalReactions,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      ...cluster.internationalReactions.map((reaction) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BulletPoint(
+                                text: reaction.trim(),
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                bulletSize: 8,
+                                bulletColor:
+                                    Theme.of(context).colorScheme.primary,
+                                spacing: 8,
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
               ],
             ),
           ),

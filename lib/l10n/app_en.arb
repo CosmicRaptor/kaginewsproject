@@ -7,5 +7,10 @@
   "readLess": "Read less",
   "highlights": "Highlights",
   "news": "News",
-  "perspectives": "Perspectives"
+  "perspectives": "Perspectives",
+  "historicalBackground": "Historical Background",
+  "humanitarianImpact": "Humanitarian Impact",
+  "technicalDetails": "Technical Details",
+  "businessAngle": "Business Angle",
+  "internationalReactions" : "International Reactions"
 }

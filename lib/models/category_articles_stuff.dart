@@ -50,6 +50,12 @@ class NewsCluster {
   final List<NewsPerspective> perspectives;
   final List<NewsArticle> articles;
   final List<NewsDomains> domains;
+  final String historicalBackground;
+  final String humanitarianImpact;
+  final List<String> technicalDetails;
+  final String businessAngleText;
+  final List<String> businessAnglePoints;
+  final List<String> internationalReactions;
 
   NewsCluster({
     required this.clusterNumber,
@@ -68,6 +74,12 @@ class NewsCluster {
     required this.perspectives,
     required this.articles,
     required this.domains,
+    required this.historicalBackground,
+    required this.humanitarianImpact,
+    required this.technicalDetails,
+    required this.businessAngleText,
+    required this.businessAnglePoints,
+    required this.internationalReactions,
   });
 
   factory NewsCluster.fromJson(Map<String, dynamic> json) {
@@ -85,6 +97,21 @@ class NewsCluster {
       quoteSourceUrl: json['quote_source_url'],
       quoteSourceDomain: json['quote_source_domain'],
       location: json['location'],
+      historicalBackground: json['historical_background'],
+      humanitarianImpact: json['humanitarian_impact'],
+      technicalDetails:
+          json['technical_details'].isNotEmpty
+              ? List<String>.from(json['technical_details'])
+              : [],
+      businessAngleText: json['business_angle_text'],
+      businessAnglePoints:
+          json['business_angle_points'].isNotEmpty
+              ? List<String>.from(json['business_angle_points'])
+              : [],
+      internationalReactions:
+          json['international_reactions'].isNotEmpty
+              ? List<String>.from(json['international_reactions'])
+              : [],
       perspectives:
           (json['perspectives'] as List)
               .map((item) => NewsPerspective.fromJson(item))
@@ -115,9 +142,12 @@ class NewsCluster {
       'quote_source_url': quoteSourceUrl,
       'quote_source_domain': quoteSourceDomain,
       'location': location,
+      'historical_background': historicalBackground,
+      'humanitarian_impact': humanitarianImpact,
       'perspectives': perspectives.map((item) => item.toJson()).toList(),
       'articles': articles.map((item) => item.toJson()).toList(),
       'domains': domains.map((item) => item.toJson()).toList(),
+      'technical_details': technicalDetails,
     };
   }
 }

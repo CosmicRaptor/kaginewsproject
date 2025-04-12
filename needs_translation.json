@@ -8,7 +8,12 @@
     "readLess",
     "highlights",
     "news",
-    "perspectives"
+    "perspectives",
+    "historicalBackground",
+    "humanitarianImpact",
+    "technicalDetails",
+    "businessAngle",
+    "internationalReactions"
   ],
 
   "hi": [
@@ -20,6 +25,11 @@
     "readLess",
     "highlights",
     "news",
-    "perspectives"
+    "perspectives",
+    "historicalBackground",
+    "humanitarianImpact",
+    "technicalDetails",
+    "businessAngle",
+    "internationalReactions"
   ]
 }
