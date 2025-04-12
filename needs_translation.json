@@ -15,7 +15,10 @@
     "businessAngle",
     "internationalReactions",
     "timeline",
-    "sources"
+    "sources",
+    "didYouKnow",
+    "actionItems",
+    "footer"
   ],
 
   "hi": [
@@ -34,6 +37,9 @@
     "businessAngle",
     "internationalReactions",
     "timeline",
-    "sources"
+    "sources",
+    "didYouKnow",
+    "actionItems",
+    "footer"
   ]
 }

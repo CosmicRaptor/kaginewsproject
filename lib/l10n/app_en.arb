@@ -14,5 +14,8 @@
   "businessAngle": "Business Angle",
   "internationalReactions" : "International Reactions",
   "timeline" : "Timeline",
-  "sources" : "Sources"
+  "sources" : "Sources",
+  "didYouKnow" : "Did you know?",
+  "actionItems" : "Action Items",
+  "footer": "Made with ❤️ by CosmicRaptor"
 }

@@ -98,12 +98,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         onNotification: haptics,
                         child: ListView(
                           padding: const EdgeInsets.all(16),
-                          children:
-                              detail.clusters
-                                  .map(
-                                    (cluster) => NewsCard(newsCluster: cluster),
-                                  )
-                                  .toList(),
+                          children: [
+                            ...detail.clusters.map(
+                              (cluster) => NewsCard(newsCluster: cluster),
+                            ),
+                            // Footer
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  l10n.footer,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodySmall?.copyWith(
+                                    // fontStyle: FontStyle.italic,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       );
                     },

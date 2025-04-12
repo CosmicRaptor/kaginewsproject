@@ -34,7 +34,8 @@ class GeneralPurposeCard extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: titleStyle ??
+                style:
+                    titleStyle ??
                     Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w600,
@@ -42,6 +43,7 @@ class GeneralPurposeCard extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               InkWell(
+                splashFactory: NoSplash.splashFactory,
                 onTap: () {
                   if (url != null) {
                     launchUrl(Uri.parse(url!));
@@ -52,10 +54,12 @@ class GeneralPurposeCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: description,
-                        style: textStyle ??
+                        style:
+                            textStyle ??
                             Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              color: Colors.blue, // Default color for description
+                              color:
+                                  Colors.blue, // Default color for description
                             ),
                       ),
                       if (urlDomain != null)

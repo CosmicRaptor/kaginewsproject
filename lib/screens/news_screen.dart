@@ -182,13 +182,12 @@ class NewsScreen extends StatelessWidget {
                                             Theme.of(
                                               context,
                                             ).textTheme.bodyLarge,
-                                        titleStyle:
-                                            Theme.of(
-                                              context,
-                                            ).textTheme.titleMedium?.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 20,
-                                            ),
+                                        titleStyle: Theme.of(
+                                          context,
+                                        ).textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20,
+                                        ),
                                       ),
                                     ),
                                   );
@@ -402,6 +401,8 @@ class NewsScreen extends StatelessWidget {
                     ],
                   ),
 
+                const Divider(),
+
                 // Sources
                 if (cluster.domains.isNotEmpty)
                   Column(
@@ -426,7 +427,81 @@ class NewsScreen extends StatelessWidget {
                   ),
 
                 const SizedBox(height: 16),
-                const Divider(),
+
+                // Did you know
+                if (cluster.didYouKnow.isNotEmpty)
+                  GeneralPurposeCard(
+                    title: l10n.didYouKnow,
+                    description: cluster.didYouKnow,
+                    textStyle: Theme.of(context).textTheme.bodyLarge,
+                    titleStyle: Theme.of(context).textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w600, fontSize: 20),
+                    bgColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.5),
+                  ),
+
+                const SizedBox(height: 16),
+
+                // Action items
+                if (cluster.userActionItems.isNotEmpty)
+                  Card(
+                    elevation: 0,
+                    color: Color.alphaBlend(
+                      Theme.of(
+                        context,
+                      ).colorScheme.tertiary.withValues(alpha: 0.3),
+                      Theme.of(context).colorScheme.surface,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            l10n.actionItems,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          ...cluster.userActionItems.map((actionItem) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                BulletPoint(
+                                  text: actionItem.trim(),
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                  bulletSize: 8,
+                                  bulletColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  spacing: 8,
+                                ),
+                              ],
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                const SizedBox(height: 16),
+
+                // Footer
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      l10n.footer,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        // fontStyle: FontStyle.italic,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
