@@ -13,17 +13,17 @@ class ShimmerLoaderHomeScreen extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          shimmerBox(width: width, height: 300),
+          shimmerBox(width: width, height: 300, context: context),
           const SizedBox(height: 10),
-          shimmerBox(width: width, height: 20),
+          shimmerBox(width: width, height: 20, context: context),
           const SizedBox(height: 5),
-          shimmerBox(width: width * 0.5, height: 20),
+          shimmerBox(width: width * 0.5, height: 20, context: context),
         ],
       );
     }
 
     return Shimmer(
-      linearGradient: shimmerGradient,
+      linearGradient: shimmerGradient(context),
       child: Container(
         color: Theme.of(context).canvasColor,
         child: SafeArea(
@@ -35,7 +35,11 @@ class ShimmerLoaderHomeScreen extends StatelessWidget {
                 if (loadAppBar) ...[
                   ShimmerLoading(
                     isLoading: true,
-                    child: shimmerBox(width: width, height: 70),
+                    child: shimmerBox(
+                      width: width,
+                      height: 70,
+                      context: context,
+                    ),
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -51,12 +55,16 @@ class ShimmerLoaderHomeScreen extends StatelessWidget {
   }
 }
 
-Widget shimmerBox({required double width, required double height}) {
+Widget shimmerBox({
+  required double width,
+  required double height,
+  required BuildContext context,
+}) {
   return Container(
     width: width,
     height: height,
     decoration: BoxDecoration(
-      color: Colors.grey[300],
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
       borderRadius: BorderRadius.circular(10),
     ),
   );
@@ -74,10 +82,10 @@ Widget imageShimmer({
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
         return Shimmer(
-          linearGradient: shimmerGradient,
+          linearGradient: shimmerGradient(context),
           child: ShimmerLoading(
             isLoading: true,
-            child: shimmerBox(width: width, height: height),
+            child: shimmerBox(width: width, height: height, context: context),
           ),
         );
       },

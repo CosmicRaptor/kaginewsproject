@@ -72,8 +72,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               body: TabBarView(
                 children: List.generate(data.categories.length, (index) {
                   if (!_loadedTabs.contains(index)) {
-                    // Placeholder before tab is visited
-                    return Container();
+                    // Updates after current frame has finished displaying
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      setState(() {
+                        _loadedTabs.add(index);
+                      });
+                    });
+                    return ShimmerLoaderHomeScreen(loadAppBar: false);
                   }
 
                   final categoryName = data.categories[index].file.replaceAll(

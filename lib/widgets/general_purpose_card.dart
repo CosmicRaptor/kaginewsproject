@@ -19,7 +19,8 @@ class GeneralPurposeCard extends StatelessWidget {
     return SizedBox(
       // width: double.infinity,
       child: Card(
-        color: Colors.grey[200],
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
           padding: const EdgeInsets.all(16),

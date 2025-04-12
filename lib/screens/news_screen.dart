@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
 import 'package:kaginewsproject/util/scroll_haptics.dart';
@@ -38,14 +37,14 @@ class NewsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // Location text
+                // Short summary
                 Text(
                   cluster.shortSummary,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 10),
 
-                // Short summary
+                // Location
                 Row(
                   children: [
                     // Location icon
@@ -66,7 +65,7 @@ class NewsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                // News Image
+                // Primary Image
                 if (cluster.articles[0].image.isNotEmpty)
                   NewsImageWithCaption(article: cluster.articles[0]),
                 const SizedBox(height: 30),
@@ -86,7 +85,7 @@ class NewsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // Talking points
+                // Talking points(highlights)
                 ...cluster.talkingPoints.map((highlight) {
                   final highlightList = highlight.split(':');
                   final title = highlightList[0];
@@ -103,7 +102,7 @@ class NewsScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(fontWeight: FontWeight.bold),
                           bulletSize: 8,
-                          bulletColor: Colors.black,
+                          bulletColor: Theme.of(context).colorScheme.primary,
                           spacing: 8,
                         ),
                         const SizedBox(height: 8),
@@ -185,6 +184,11 @@ class NewsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                const SizedBox(height: 16),
+
+                // Geopolitical context
+                // if (cluster)
               ],
             ),
           ),
