@@ -12,5 +12,6 @@
   "humanitarianImpact": "Humanitarian Impact",
   "technicalDetails": "Technical Details",
   "businessAngle": "Business Angle",
-  "internationalReactions" : "International Reactions"
+  "internationalReactions" : "International Reactions",
+  "timeline" : "Timeline"
 }

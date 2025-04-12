@@ -4,6 +4,7 @@ import 'package:kaginewsproject/models/category_articles_stuff.dart';
 import 'package:kaginewsproject/util/scroll_haptics.dart';
 import 'package:kaginewsproject/widgets/general_purpose_card.dart';
 import 'package:kaginewsproject/widgets/news_image_with_caption.dart';
+import 'package:kaginewsproject/widgets/timeline_stepper.dart';
 
 import '../widgets/bullet_point.dart';
 import '../widgets/dashed_line_divider.dart';
@@ -366,6 +367,31 @@ class NewsScreen extends StatelessWidget {
                       }),
                     ],
                   ),
+
+                const Divider(),
+                const SizedBox(height: 16),
+
+                // Timeline
+                if (cluster.timeline.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.timeline,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TimelineStepper(timeline: cluster.timeline),
+                    ],
+                  ),
+
+                const SizedBox(height: 16),
+                const Divider(),
               ],
             ),
           ),

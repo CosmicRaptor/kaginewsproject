@@ -13,7 +13,8 @@
     "humanitarianImpact",
     "technicalDetails",
     "businessAngle",
-    "internationalReactions"
+    "internationalReactions",
+    "timeline"
   ],
 
   "hi": [
@@ -30,6 +31,7 @@
     "humanitarianImpact",
     "technicalDetails",
     "businessAngle",
-    "internationalReactions"
+    "internationalReactions",
+    "timeline"
   ]
 }

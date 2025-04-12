@@ -56,6 +56,7 @@ class NewsCluster {
   final String businessAngleText;
   final List<String> businessAnglePoints;
   final List<String> internationalReactions;
+  final List<String> timeline;
 
   NewsCluster({
     required this.clusterNumber,
@@ -80,6 +81,7 @@ class NewsCluster {
     required this.businessAngleText,
     required this.businessAnglePoints,
     required this.internationalReactions,
+    required this.timeline,
   });
 
   factory NewsCluster.fromJson(Map<String, dynamic> json) {
@@ -116,6 +118,10 @@ class NewsCluster {
           (json['perspectives'] as List)
               .map((item) => NewsPerspective.fromJson(item))
               .toList(),
+      timeline:
+          json['timeline'].isNotEmpty
+              ? List<String>.from(json['timeline'])
+              : [],
       articles:
           (json['articles'] as List)
               .map((item) => NewsArticle.fromJson(item))
