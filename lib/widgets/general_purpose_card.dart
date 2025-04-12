@@ -17,7 +17,7 @@ class GeneralPurposeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      // width: double.infinity,
       child: Card(
         color: Colors.grey[200],
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

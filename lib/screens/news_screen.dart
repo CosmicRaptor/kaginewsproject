@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
 import 'package:kaginewsproject/util/scroll_haptics.dart';
@@ -37,11 +38,31 @@ class NewsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Short summary
+                // Location text
                 Text(
                   cluster.shortSummary,
                   style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 10),
+
+                // Short summary
+                Row(
+                  children: [
+                    // Location icon
+                    Icon(
+                      Icons.location_on_outlined,
+                      size: 16,
+                      color: Colors.grey[600],
+                    ),
+                    Text(
+                      cluster.location,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 24),
 
@@ -102,11 +123,14 @@ class NewsScreen extends StatelessWidget {
                 const SizedBox(height: 16),
 
                 // Quote card
-                GeneralPurposeCard(
-                  title: cluster.quote,
-                  description: cluster.quoteAuthor,
-                  url: cluster.quoteSourceUrl,
-                  urlDomain: cluster.quoteSourceDomain,
+                SizedBox(
+                  width: double.infinity,
+                  child: GeneralPurposeCard(
+                    title: cluster.quote,
+                    description: cluster.quoteAuthor,
+                    url: cluster.quoteSourceUrl,
+                    urlDomain: cluster.quoteSourceDomain,
+                  ),
                 ),
                 const SizedBox(height: 16),
 
@@ -114,6 +138,53 @@ class NewsScreen extends StatelessWidget {
                 if (cluster.articles.length > 1 &&
                     cluster.articles[1].image.isNotEmpty)
                   NewsImageWithCaption(article: cluster.articles[1]),
+
+                const SizedBox(height: 30),
+                const Divider(),
+                const SizedBox(height: 16),
+
+                // Perspectives heading
+                if (cluster.perspectives.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.perspectives,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: IntrinsicHeight(
+                          child: Row(
+                            children:
+                                cluster.perspectives.map((perspective) {
+                                  final perspectiveArray = perspective.text
+                                      .split(":");
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: SizedBox(
+                                      width: 300,
+                                      // height: 300,
+                                      child: GeneralPurposeCard(
+                                        title: perspectiveArray[0],
+                                        description: perspectiveArray[1],
+                                        url: perspective.sources[0].url,
+                                        urlDomain: perspective.sources[0].name,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
