@@ -14,7 +14,8 @@
     "technicalDetails",
     "businessAngle",
     "internationalReactions",
-    "timeline"
+    "timeline",
+    "sources"
   ],
 
   "hi": [
@@ -32,6 +33,7 @@
     "technicalDetails",
     "businessAngle",
     "internationalReactions",
-    "timeline"
+    "timeline",
+    "sources"
   ]
 }

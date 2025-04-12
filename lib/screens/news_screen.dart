@@ -8,6 +8,7 @@ import 'package:kaginewsproject/widgets/timeline_stepper.dart';
 
 import '../widgets/bullet_point.dart';
 import '../widgets/dashed_line_divider.dart';
+import '../widgets/sources_widget.dart';
 
 class NewsScreen extends StatelessWidget {
   final NewsCluster cluster;
@@ -144,7 +145,7 @@ class NewsScreen extends StatelessWidget {
                 const Divider(),
                 const SizedBox(height: 16),
 
-                // Perspectives heading
+                // Perspectives
                 if (cluster.perspectives.isNotEmpty)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,6 +178,17 @@ class NewsScreen extends StatelessWidget {
                                         description: perspectiveArray[1],
                                         url: perspective.sources[0].url,
                                         urlDomain: perspective.sources[0].name,
+                                        textStyle:
+                                            Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge,
+                                        titleStyle:
+                                            Theme.of(
+                                              context,
+                                            ).textTheme.titleMedium?.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20,
+                                            ),
                                       ),
                                     ),
                                   );
@@ -387,6 +399,29 @@ class NewsScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       TimelineStepper(timeline: cluster.timeline),
+                    ],
+                  ),
+
+                // Sources
+                if (cluster.domains.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.sources,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        height: 50,
+                        width: double.infinity,
+                        child: SourcesWidget(sources: cluster.domains),
+                      ),
                     ],
                   ),
 
