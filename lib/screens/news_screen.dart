@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kaginewsproject/l10n/l10n.dart';
-import 'package:kaginewsproject/models/category_articles_stuff.dart';
-import 'package:kaginewsproject/util/scroll_haptics.dart';
-import 'package:kaginewsproject/widgets/general_purpose_card.dart';
-import 'package:kaginewsproject/widgets/news_image_with_caption.dart';
-import 'package:kaginewsproject/widgets/timeline_stepper.dart';
 
+import '../l10n/l10n.dart';
+import '../models/category_articles_stuff.dart';
+import '../util/scroll_haptics.dart';
+import '../widgets/general_purpose_card.dart';
+import '../widgets/news_image_with_caption.dart';
+import '../widgets/timeline_stepper.dart';
 import '../widgets/bullet_point.dart';
 import '../widgets/dashed_line_divider.dart';
 import '../widgets/sources_widget.dart';

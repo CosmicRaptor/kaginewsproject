@@ -20,7 +20,7 @@ class NewsRepository {
 
   static Future<NewsCategoryDetail> getCategory(String category) async {
     final response = await http.get(
-      Uri.parse("https://kite.kagi.com/$category.json"),
+      Uri.parse("https://kite.kagi.com/$category"),
     );
 
     if (response.statusCode == 200) {

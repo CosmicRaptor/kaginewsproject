@@ -4,6 +4,7 @@ import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/widgets/news_card.dart';
 import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
 import '../providers/api_provider.dart';
+import '../providers/storage_providers.dart';
 import '../util/scroll_haptics.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -27,9 +28,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final categoriesAsync = ref.watch(categoriesProvider);
+    final userSavedCategories = ref.watch(getSavedCategoriesProvider);
 
-    return categoriesAsync.when(
+    return userSavedCategories.when(
       loading: () => const ShimmerLoaderHomeScreen(loadAppBar: true),
       error:
           (error, stacktrace) => Center(
@@ -40,7 +41,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           ),
       data: (data) {
         return DefaultTabController(
-          length: data.categories.length,
+          length: data.length,
           child: Scaffold(
             body: NestedScrollView(
               headerSliverBuilder: (
@@ -54,6 +55,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       height: 5,
                       child: Image.asset('assets/kite.png', fit: BoxFit.fill),
                     ),
+                    actions: [
+                      IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                    ],
                     title: Text(l10n.appNameShort),
                     pinned: true,
                     floating: true,
@@ -61,16 +65,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     bottom: TabBar(
                       isScrollable: true,
                       tabAlignment: TabAlignment.start,
-                      tabs:
-                          data.categories
-                              .map((category) => Tab(text: category.name))
-                              .toList(),
+                      tabs: List.generate(data.length, (index) {
+                        final categoryName = data[index].name;
+                        return Tab(text: categoryName);
+                      }),
                     ),
                   ),
                 ];
               },
               body: TabBarView(
-                children: List.generate(data.categories.length, (index) {
+                children: List.generate(data.length, (index) {
                   if (!_loadedTabs.contains(index)) {
                     // Updates after current frame has finished displaying
                     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -81,10 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     return ShimmerLoaderHomeScreen(loadAppBar: false);
                   }
 
-                  final categoryName = data.categories[index].file.replaceAll(
-                    ".json",
-                    "",
-                  );
+                  final categoryName = data[index].file;
                   final categoryAsync = ref.watch(
                     getCategoryProvider(categoryName),
                   );
