@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/widgets/news_card.dart';
 import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
@@ -56,7 +57,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       child: Image.asset('assets/kite.png', fit: BoxFit.fill),
                     ),
                     actions: [
-                      IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                      IconButton(
+                        onPressed: () {
+                          context.push('/settings', extra: data);
+                        },
+                        icon: Icon(Icons.settings),
+                      ),
                     ],
                     title: Text(l10n.appNameShort),
                     pinned: true,

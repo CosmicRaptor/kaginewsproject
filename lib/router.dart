@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'models/categories_model.dart';
+import 'screens/settings_screen.dart';
 import 'screens/onboarding_screen.dart';
 import 'models/category_articles_stuff.dart';
 import 'screens/home_screen.dart';
@@ -63,6 +65,13 @@ final routerConf = GoRouter(
     GoRoute(
       path: '/onboarding',
       builder: (context, state) => const OnboardingScreen(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) {
+        final selectedCats = state.extra as List<Category>;
+        return SettingsScreen(selectedCats: selectedCats);
+      },
     ),
   ],
 );
