@@ -1,6 +1,25 @@
 # kaginewsproject
 Demo project for Kagi Flutter app developer position.
 
+## Setup instructions
+#### Make sure you have flutter installed.
+1. #### Clone the repository
+```bash
+git clone https://github.com/CosmicRaptor/kaginewsproject.git
+cd kite-news-app
+```
+2. #### Install dependencies
+```bash
+flutter pub get
+```
+3. #### Follow [Google's](https://firebase.google.com/docs/flutter/setup) instructions to setup firebase for the project
+4. #### Build/run the app
+```bash
+flutter build apk
+flutter run
+```
+
+
 ## Problem Statement
 
 The project is to build a simple news aggregator application using Flutter. The core requirements are:
@@ -56,11 +75,20 @@ https://github.com/user-attachments/assets/392669d8-6352-445a-ba53-f849105a59c4
 
 https://github.com/user-attachments/assets/7fd05ae1-315b-4e95-8974-840aed73cccf
 
+### 13 April 2025
+- Onboarding screen added (Particle effect made from scratch in Canvas)
+- Page transitions added
+- Notification support added
+- App is entering the polish stage, most features delivered.
+
+https://github.com/user-attachments/assets/01362cd9-9917-4ef0-9bb0-c00d2f5cea8a
+
+
+
 ### What's left:
 - Finishing the remaining sections, labelled as "others" in the website.
 - Improving the UI
 - Making a settings page to let users change the categories they wish to see, currently all are shown.
-- Creating an onboarding page.
 - Caching news for offline viewing
 - Writing unit tests
 - Some documentation
