@@ -21,6 +21,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   late List<Category> enabled;
   // Available is the list of all categories, to allow adding items
   late List<Category> available;
+  bool initialized = false;
 
   @override
   void initState() {
@@ -42,16 +43,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
           loading: () => ShimmerLoaderHomeScreen(loadAppBar: true),
           data: (data) {
-            available = data.categories;
+            if (!initialized) {
+              available = [];
+              for (int i = 0; i < data.categories.length; i++) {
+                if (!enabled.contains(data.categories[i])) {
+                  available.add(data.categories[i]);
+                }
+              }
+
+              initialized = true;
+            }
             return Scaffold(
               appBar: AppBar(title: const Text('Settings')),
               body: Padding(
                 padding: const EdgeInsets.all(16),
                 child: ListView(
                   children: [
-                    const Text(
+                    Text(
                       "Tap to toggle. Drag enabled categories to reorder.",
-                      style: TextStyle(color: Colors.white70),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const SizedBox(height: 12),
 
@@ -75,7 +85,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       spacing: 8,
                       runSpacing: 8,
                       children:
-                          data.categories
+                          available
                               .map((cat) => _buildChip(cat, false))
                               .toList(),
                     ),
@@ -84,6 +94,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ElevatedButton(
                       onPressed: () {
                         ref.read(saveCategoriesProvider(enabled));
+                        ref.invalidate(getSavedCategoriesProvider);
                       },
                       child: const Text('Save'),
                     ),
