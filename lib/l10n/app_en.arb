@@ -17,5 +17,7 @@
   "sources" : "Sources",
   "didYouKnow" : "Did you know?",
   "actionItems" : "Action Items",
-  "footer": "Made with ❤️ by CosmicRaptor"
+  "footer": "Made with ❤️ by CosmicRaptor",
+  "welcomeText": "Welcome to Kite",
+  "welcomeDescription": "Find news from every source you can imagine, condensed into a single feed."
 }

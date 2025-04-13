@@ -18,7 +18,9 @@
     "sources",
     "didYouKnow",
     "actionItems",
-    "footer"
+    "footer",
+    "welcomeText",
+    "welcomeDescription"
   ],
 
   "hi": [
@@ -40,6 +42,8 @@
     "sources",
     "didYouKnow",
     "actionItems",
-    "footer"
+    "footer",
+    "welcomeText",
+    "welcomeDescription"
   ]
 }
