@@ -1,7 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kaginewsproject/models/categories_model.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
+import 'package:kaginewsproject/models/onthisday_model.dart';
 import 'package:kaginewsproject/repository/news_repository.dart';
+
+import '../models/wikipedia_summary_model.dart';
 
 final categoriesProvider = FutureProvider<CategoryData>((ref) async {
   final response = await NewsRepository.getCategories();
@@ -13,5 +16,18 @@ final getCategoryProvider = FutureProvider.family<NewsCategoryDetail, String>((
   category,
 ) async {
   final response = await NewsRepository.getCategory(category);
+  return response;
+});
+
+final getOnThisDayProvider = FutureProvider<OnThisDay>((ref) async {
+  final response = await NewsRepository.getOnThisDay();
+  return response;
+});
+
+final getWikipediaSummaryProvider = FutureProvider.family<WikiSummary, String>((
+  ref,
+  title,
+) async {
+  final response = await NewsRepository.getWikipediaSummary(title);
   return response;
 });

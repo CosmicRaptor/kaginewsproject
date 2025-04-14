@@ -40,6 +40,7 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^2.6.1
   go_router: ^14.8.1
+  html: ^0.15.5+1
   http: ^1.3.0
   intl: any
   reorderables: ^0.6.0

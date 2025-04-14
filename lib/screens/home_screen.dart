@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
-import 'package:kaginewsproject/widgets/news_card.dart';
+import 'package:kaginewsproject/models/category_articles_stuff.dart';
+import 'package:kaginewsproject/models/onthisday_model.dart';
+import 'package:kaginewsproject/widgets/home_widget.dart';
+import 'package:kaginewsproject/widgets/onthisday_widget.dart';
 import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
 import '../providers/api_provider.dart';
 import '../providers/storage_providers.dart';
@@ -92,40 +95,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   }
 
                   final categoryName = data[index].file;
-                  final categoryAsync = ref.watch(
-                    getCategoryProvider(categoryName),
-                  );
+                  final categoryAsync =
+                      categoryName != "onthisday.json"
+                          ? ref.watch(getCategoryProvider(categoryName))
+                          : ref.watch(getOnThisDayProvider);
 
                   return categoryAsync.when(
                     loading:
                         () => const ShimmerLoaderHomeScreen(loadAppBar: false),
-                    error: (e, _) => Center(child: Text(l10n.errorOccured)),
+                    error: (e, _) {
+                      return Center(child: Text(l10n.errorOccured));
+                    },
                     data: (detail) {
                       return NotificationListener<ScrollNotification>(
                         onNotification: haptics,
-                        child: ListView(
-                          padding: const EdgeInsets.all(16),
-                          children: [
-                            ...detail.clusters.map(
-                              (cluster) => NewsCard(newsCluster: cluster),
-                            ),
-                            // Footer
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  l10n.footer,
-                                  style: Theme.of(
-                                    context,
-                                  ).textTheme.bodySmall?.copyWith(
-                                    // fontStyle: FontStyle.italic,
-                                    color: Colors.grey[600],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                        child:
+                            categoryName != "onthisday.json"
+                                ? HomeWidget(
+                                  detail: detail as NewsCategoryDetail,
+                                )
+                                : OnthisdayWidget(events: detail as OnThisDay),
                       );
                     },
                   );
