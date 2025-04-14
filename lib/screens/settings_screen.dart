@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../providers/api_provider.dart';
@@ -31,6 +32,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return ref
         .watch(categoriesProvider)
         .when(
@@ -54,13 +56,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               initialized = true;
             }
             return Scaffold(
-              appBar: AppBar(title: const Text('Settings')),
+              appBar: AppBar(title: Text(l10n.settingsPageTitle)),
               body: Padding(
                 padding: const EdgeInsets.all(16),
                 child: ListView(
                   children: [
                     Text(
-                      "Tap to toggle. Drag enabled categories to reorder.",
+                      l10n.settingsReorderText,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     const SizedBox(height: 12),
@@ -122,13 +124,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: isEnabled ? const Color(0xff2676FF) : Colors.white10,
+          color:
+              isEnabled
+                  ? const Color(0xff2676FF)
+                  : Theme.of(context).colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           cat.name,
           style: TextStyle(
-            color: isEnabled ? Colors.white : Colors.white70,
+            color:
+                isEnabled
+                    ? Colors.white
+                    : Theme.of(context).textTheme.bodySmall!.color,
             fontWeight: FontWeight.w500,
           ),
         ),

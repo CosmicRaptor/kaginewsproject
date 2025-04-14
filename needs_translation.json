@@ -20,7 +20,9 @@
     "actionItems",
     "footer",
     "welcomeText",
-    "welcomeDescription"
+    "welcomeDescription",
+    "settingsReorderText",
+    "settingsPageTitle"
   ],
 
   "hi": [
@@ -44,6 +46,8 @@
     "actionItems",
     "footer",
     "welcomeText",
-    "welcomeDescription"
+    "welcomeDescription",
+    "settingsReorderText",
+    "settingsPageTitle"
   ]
 }
