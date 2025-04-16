@@ -16,10 +16,6 @@ final getFirstTimeProvider = FutureProvider<bool>((ref) async {
   final prefs = await ref.watch(sharedPreferencesProvider.future);
   // Check if the app is opened for the first time
   final firstTime = prefs.getBool('firstTime') ?? true;
-  if (firstTime) {
-    // If it's the first time, set it to false
-    await prefs.setBool('firstTime', false);
-  }
   return firstTime;
 });
 
@@ -33,6 +29,7 @@ final getSavedCategoriesProvider = FutureProvider<List<Category>>((ref) async {
   if (firstTime) {
     // Save default categories
     ref.watch(saveCategoriesProvider(defaultCategories));
+    prefs.setBool('firstTime', false);
     return defaultCategories;
   }
   // Convert each from json to Category object

@@ -48,6 +48,28 @@ class _NewsCardState extends State<NewsCard> {
                       widget.newsCluster.category,
                       style: TextStyle(color: Colors.grey[400]),
                     ),
+                    const SizedBox(height: 5),
+                    if (widget.newsCluster.location.isNotEmpty)
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 16,
+                            color: Colors.grey[600],
+                          ),
+                          Text(
+                            widget.newsCluster.location,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.grey[400],
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     const SizedBox(height: 15),
                     Text(widget.newsCluster.title),
                     // const SizedBox(height: 5),
@@ -67,7 +89,10 @@ class _NewsCardState extends State<NewsCard> {
                           ),
                           child: Text(
                             '${l10n.readMore}...',
-                            style: TextStyle(color: Colors.grey[400]),
+                            style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       ],

@@ -4,6 +4,8 @@ import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/onthisday_model.dart';
 import 'package:kaginewsproject/providers/api_provider.dart';
 import 'package:kaginewsproject/providers/viewmodel_providers.dart';
+import 'package:kaginewsproject/util/shimmer_effects.dart';
+import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
 
 class ThisdayPeopleCard extends ConsumerWidget {
   final OnThisDayEvent event;
@@ -23,10 +25,16 @@ class ThisdayPeopleCard extends ConsumerWidget {
                 return Center(child: Text(l10n.errorOccured));
               },
               loading:
-                  () => const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(),
+                  () => Shimmer(
+                    linearGradient: shimmerGradient(context),
+                    child: ShimmerLoading(
+                      isLoading: true,
+                      child: shimmerBox(
+                        width: width * 0.3 + 60,
+                        height: 100,
+                        context: context,
+                      ),
+                    ),
                   ),
               data: (data) {
                 return Card(
