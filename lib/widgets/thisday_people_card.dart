@@ -14,6 +14,7 @@ class ThisdayPeopleCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final title = ref.watch(onthisdayWikipediaTitleProvider(event.content));
+    final width = MediaQuery.of(context).size.width;
     return title != null
         ? ref
             .watch(getWikipediaSummaryProvider(title))
@@ -29,6 +30,8 @@ class ThisdayPeopleCard extends ConsumerWidget {
                   ),
               data: (data) {
                 return Card(
+                  elevation: 0,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -54,21 +57,14 @@ class ThisdayPeopleCard extends ConsumerWidget {
                                 ),
                               ),
                             const SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  title,
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                RichText(
-                                  text: span,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                            SizedBox(
+                              width: width * 0.3,
+                              child: RichText(
+                                text: span,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
                             ),
                           ],
                         ),

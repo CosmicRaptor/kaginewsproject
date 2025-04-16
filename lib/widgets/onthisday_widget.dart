@@ -15,37 +15,41 @@ class OnthisdayWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final vm = ref.watch(onthisdayVMProvider(events));
     final people = vm.getPeople();
-    return ListView(
-      children: [
-        // Timeline of events
-        Text('Events', style: Theme.of(context).textTheme.headlineMedium),
-        const SizedBox(height: 10),
-        OnthisdayTimelineStepper(events: events),
-        const SizedBox(height: 20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: ListView(
+        children: [
+          // Timeline of events
+          Text('Events', style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 10),
+          OnthisdayTimelineStepper(events: events),
+          const SizedBox(height: 20),
 
-        // Timeline of people
-        Text('People', style: Theme.of(context).textTheme.headlineMedium),
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children:
-                people.map((event) {
-                  return ThisdayPeopleCard(
-                    event: event,
-                    span: vm.htmlToTextSpan(
-                      event.content,
-                      onLinkTap: (ref) {},
-                      baseStyle: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  );
-                }).toList(),
+          // Timeline of people
+          Text('People', style: Theme.of(context).textTheme.headlineMedium),
+          const SizedBox(height: 10),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children:
+                  people.map((event) {
+                    return ThisdayPeopleCard(
+                      event: event,
+                      span: vm.htmlToTextSpan(
+                        event.content,
+                        onLinkTap: (ref) {},
+                        baseStyle: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    );
+                  }).toList(),
+            ),
           ),
-        ),
-        const SizedBox(height: 20),
+          const SizedBox(height: 20),
 
-        // Footer
-        const FooterText(),
-      ],
+          // Footer
+          const FooterText(),
+        ],
+      ),
     );
   }
 }

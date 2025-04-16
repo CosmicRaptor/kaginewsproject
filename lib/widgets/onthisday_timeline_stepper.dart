@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kaginewsproject/models/onthisday_model.dart';
 import 'package:kaginewsproject/providers/viewmodel_providers.dart';
 import 'package:kaginewsproject/widgets/custom_stepper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OnthisdayTimelineStepper extends ConsumerWidget {
   final OnThisDay events;
@@ -24,7 +25,9 @@ class OnthisdayTimelineStepper extends ConsumerWidget {
           eventsList.map((event) {
             final textSpan = vm.htmlToTextSpan(
               event.content,
-              onLinkTap: (href) {},
+              onLinkTap: (href) {
+                launchUrl(Uri.parse(href));
+              },
               baseStyle: Theme.of(context).textTheme.bodySmall,
             );
             return ModifiedStep(

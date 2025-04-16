@@ -55,11 +55,12 @@ class OnthisdayViewModel {
                 color: Colors.blue,
                 decoration: TextDecoration.underline,
               ),
-              recognizer:
-                  TapGestureRecognizer()
-                    ..onTap = () {
-                      if (onLinkTap != null) onLinkTap(href);
-                    },
+              recognizer: TapGestureRecognizer(
+                  supportedDevices: {PointerDeviceKind.touch},
+                )
+                ..onTap = () {
+                  if (onLinkTap != null) onLinkTap(href);
+                },
             ),
           );
         } else if (node.localName == 'b') {
