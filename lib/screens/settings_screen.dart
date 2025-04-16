@@ -76,6 +76,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           final item = enabled.removeAt(oldIndex);
                           enabled.insert(newIndex, item);
                         });
+                        ref.watch(saveCategoriesProvider(enabled));
+                        ref.invalidate(getSavedCategoriesProvider);
                       },
                       children:
                           enabled.map((cat) => _buildChip(cat, true)).toList(),
@@ -93,13 +95,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
 
                     const SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: () {
-                        ref.read(saveCategoriesProvider(enabled));
-                        ref.invalidate(getSavedCategoriesProvider);
-                      },
-                      child: const Text('Save'),
-                    ),
                   ],
                 ),
               ),
@@ -119,6 +114,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             available.remove(cat);
             enabled.add(cat);
           }
+          ref.watch(saveCategoriesProvider(enabled));
+          ref.invalidate(getSavedCategoriesProvider);
         });
       },
       child: Container(
