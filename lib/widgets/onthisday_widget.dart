@@ -14,7 +14,7 @@ class OnthisdayWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final vm = ref.watch(onthisdayVMProvider(events));
-    final people = vm.getPeople();
+    final people = vm.people;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: ListView(
@@ -37,7 +37,9 @@ class OnthisdayWidget extends ConsumerWidget {
                       event: event,
                       span: vm.htmlToTextSpan(
                         event.content,
-                        onLinkTap: (ref) {},
+                        onLinkTap: (ref) {
+                          // TODO: Handle link tap
+                        },
                         baseStyle: Theme.of(context).textTheme.bodySmall,
                       ),
                     );

@@ -7,8 +7,10 @@ import 'package:kaginewsproject/enums/event_type_enum.dart';
 import '../models/onthisday_model.dart';
 
 class OnthisdayViewModel {
-  final OnThisDay events;
-  const OnthisdayViewModel({required this.events});
+  final OnThisDay inputEvents;
+  const OnthisdayViewModel({required this.inputEvents});
+
+  OnThisDay get event => inputEvents;
 
   TextSpan htmlToTextSpan(
     String html, {
@@ -36,7 +38,7 @@ class OnthisdayViewModel {
 
     for (var node in nodes) {
       if (node is dom.Text) {
-        spans.add(TextSpan(text: node.text));
+        spans.add(TextSpan(text: node.text, style: style));
       } else if (node is dom.Element) {
         if (node.localName == 'a') {
           final href = node.attributes['href'] ?? '';
@@ -81,17 +83,21 @@ class OnthisdayViewModel {
     return spans;
   }
 
-  List<OnThisDayEvent> getEvents() {
-    return events.events
+  List<OnThisDayEvent> _getEvents() {
+    return inputEvents.events
         .where((event) => event.type == EventType.event)
         .toList();
   }
 
-  List<OnThisDayEvent> getPeople() {
-    return events.events
+  List<OnThisDayEvent> get events => _getEvents();
+
+  List<OnThisDayEvent> _getPeople() {
+    return inputEvents.events
         .where((event) => event.type == EventType.people)
         .toList();
   }
+
+  List<OnThisDayEvent> get people => _getPeople();
 
   static String? getTitle(String content) {
     final root = parse(content);

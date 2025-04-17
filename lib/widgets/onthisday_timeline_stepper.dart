@@ -12,7 +12,7 @@ class OnthisdayTimelineStepper extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final vm = ref.watch(onthisdayVMProvider(events));
-    final eventsList = vm.getEvents();
+    final eventsList = vm.events;
     return ModifiedStepper(
       type: ModifiedStepperType.vertical,
       currentStep: 0,

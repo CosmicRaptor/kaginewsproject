@@ -9,7 +9,7 @@ final onthisdayVMProvider = Provider.family<OnthisdayViewModel, OnThisDay>((
   ref,
   events,
 ) {
-  final onthisday = OnthisdayViewModel(events: events);
+  final onthisday = OnthisdayViewModel(inputEvents: events);
   return onthisday;
 });
 
