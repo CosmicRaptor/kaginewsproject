@@ -7,121 +7,105 @@ import 'package:kaginewsproject/models/onthisday_model.dart';
 import 'package:kaginewsproject/widgets/home_widget.dart';
 import 'package:kaginewsproject/widgets/onthisday_widget.dart';
 import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
-import '../providers/api_provider.dart';
-import '../providers/storage_providers.dart';
+import '../providers/viewmodel_providers.dart';
 import '../util/scroll_haptics.dart';
 
-class HomeScreen extends ConsumerStatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  ConsumerState<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends ConsumerState<HomeScreen>
-    with TickerProviderStateMixin {
-  final Set<int> _loadedTabs = {};
-
-  @override
-  void initState() {
-    //Preload the first tab
-    _loadedTabs.add(0);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final userSavedCategories = ref.watch(getSavedCategoriesProvider);
+    final vm = ref.watch(homeVMProvider);
+    final categoriesAsync = vm.categories;
 
-    return userSavedCategories.when(
+    return categoriesAsync.when(
       loading: () => const ShimmerLoaderHomeScreen(loadAppBar: true),
       error:
-          (error, stacktrace) => Center(
+          (error, _) => Center(
             child: Text(
               l10n.errorOccured,
               style: const TextStyle(color: Colors.red),
             ),
           ),
-      data: (data) {
-        return DefaultTabController(
-          length: data.length,
-          child: Scaffold(
-            body: NestedScrollView(
-              headerSliverBuilder: (
-                BuildContext context,
-                bool innerBoxIsScrolled,
-              ) {
-                return <Widget>[
-                  SliverAppBar(
-                    leading: SizedBox(
-                      width: 5,
-                      height: 5,
-                      child: Image.asset('assets/kite.png', fit: BoxFit.fill),
-                    ),
-                    actions: [
-                      IconButton(
-                        onPressed: () {
-                          context.push('/settings', extra: data);
-                        },
-                        icon: Icon(Icons.settings),
+      data:
+          (categories) => DefaultTabController(
+            length: categories.length,
+            child: Scaffold(
+              body: NestedScrollView(
+                headerSliverBuilder:
+                    (_, __) => [
+                      SliverAppBar(
+                        leading: Image.asset('assets/kite.png'),
+                        actions: [
+                          IconButton(
+                            icon: const Icon(Icons.settings),
+                            onPressed:
+                                () => context.push(
+                                  '/settings',
+                                  extra: categories,
+                                ),
+                          ),
+                        ],
+                        title: Text(l10n.appNameShort),
+                        pinned: true,
+                        floating: true,
+                        snap: true,
+                        bottom: TabBar(
+                          isScrollable: true,
+                          tabAlignment: TabAlignment.start,
+                          tabs: [
+                            for (final category in categories)
+                              Tab(text: category.name),
+                          ],
+                        ),
                       ),
                     ],
-                    title: Text(l10n.appNameShort),
-                    pinned: true,
-                    floating: true,
-                    snap: true,
-                    bottom: TabBar(
-                      isScrollable: true,
-                      tabAlignment: TabAlignment.start,
-                      tabs: List.generate(data.length, (index) {
-                        final categoryName = data[index].name;
-                        return Tab(text: categoryName);
-                      }),
-                    ),
-                  ),
-                ];
-              },
-              body: TabBarView(
-                children: List.generate(data.length, (index) {
-                  if (!_loadedTabs.contains(index)) {
-                    // Updates after current frame has finished displaying
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      setState(() {
-                        _loadedTabs.add(index);
-                      });
-                    });
-                    return ShimmerLoaderHomeScreen(loadAppBar: false);
-                  }
-
-                  final categoryName = data[index].file;
-                  final categoryAsync =
-                      categoryName != "onthisday.json"
-                          ? ref.watch(getCategoryProvider(categoryName))
-                          : ref.watch(getOnThisDayProvider);
-
-                  return categoryAsync.when(
-                    loading:
-                        () => const ShimmerLoaderHomeScreen(loadAppBar: false),
-                    error: (e, _) {
-                      return Center(child: Text(l10n.errorOccured));
-                    },
-                    data: (detail) {
-                      return NotificationListener<ScrollNotification>(
-                        onNotification: haptics,
-                        child:
-                            categoryName != "onthisday.json"
-                                ? HomeWidget(
-                                  detail: detail as NewsCategoryDetail,
-                                )
-                                : OnthisdayWidget(events: detail as OnThisDay),
-                      );
-                    },
-                  );
-                }),
+                body: TabBarView(
+                  children: [
+                    for (int index = 0; index < categories.length; index++)
+                      _TabContent(
+                        index: index,
+                        fileName: categories[index].file,
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
+    );
+  }
+}
+
+class _TabContent extends ConsumerWidget {
+  final int index;
+  final String fileName;
+
+  const _TabContent({required this.index, required this.fileName});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final vm = ref.watch(homeVMProvider);
+
+    if (!vm.loadedTabs.contains(index)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(homeVMProvider.notifier).markTabAsLoaded(index);
+      });
+      return const ShimmerLoaderHomeScreen(loadAppBar: false);
+    }
+
+    final dataAsync = vm.getCategoryData(index, fileName);
+
+    return dataAsync.when(
+      loading: () => const ShimmerLoaderHomeScreen(loadAppBar: false),
+      error: (e, _) => Center(child: Text(context.l10n.errorOccured)),
+      data: (data) {
+        return NotificationListener<ScrollNotification>(
+          onNotification: haptics,
+          child:
+              fileName != "onthisday.json"
+                  ? HomeWidget(detail: data as NewsCategoryDetail)
+                  : OnthisdayWidget(events: data as OnThisDay),
         );
       },
     );

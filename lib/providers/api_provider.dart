@@ -6,8 +6,13 @@ import 'package:kaginewsproject/repository/news_repository.dart';
 
 import '../models/wikipedia_summary_model.dart';
 
+final newsRepositoryProvider = Provider<NewsRepository>((ref) {
+  return NewsRepository();
+});
+
 final categoriesProvider = FutureProvider<CategoryData>((ref) async {
-  final response = await NewsRepository.getCategories();
+  final repository = ref.watch(newsRepositoryProvider);
+  final response = await repository.getCategories();
   return response;
 });
 
@@ -15,12 +20,14 @@ final getCategoryProvider = FutureProvider.family<NewsCategoryDetail, String>((
   ref,
   category,
 ) async {
-  final response = await NewsRepository.getCategory(category);
+  final repository = ref.watch(newsRepositoryProvider);
+  final response = await repository.getCategory(category);
   return response;
 });
 
 final getOnThisDayProvider = FutureProvider<OnThisDay>((ref) async {
-  final response = await NewsRepository.getOnThisDay();
+  final repository = ref.watch(newsRepositoryProvider);
+  final response = await repository.getOnThisDay();
   return response;
 });
 
@@ -28,6 +35,7 @@ final getWikipediaSummaryProvider = FutureProvider.family<WikiSummary, String>((
   ref,
   title,
 ) async {
-  final response = await NewsRepository.getWikipediaSummary(title);
+  final repository = ref.watch(newsRepositoryProvider);
+  final response = await repository.getWikipediaSummary(title);
   return response;
 });
