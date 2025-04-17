@@ -83,18 +83,28 @@ https://github.com/user-attachments/assets/7fd05ae1-315b-4e95-8974-840aed73cccf
 
 https://github.com/user-attachments/assets/01362cd9-9917-4ef0-9bb0-c00d2f5cea8a
 
+### 17 April 2025
+- Settings screen added
+- On this day JSON model mapped and screen designed.
+- Page transition, loading animations polished
+- Started refractoring the codebase to make it testable
+- Started adding unit tests, widget tests coming soon.
+- Started work on caching pages.
+
+
+https://github.com/user-attachments/assets/1abbf9a8-1bde-4b98-b65e-63018d0d22a4
+
+
 
 
 ### What's left:
-- Finishing the remaining sections, labelled as "others" in the website.
 - Improving the UI
-- Making a settings page to let users change the categories they wish to see, currently all are shown.
 - Caching news for offline viewing
 - Writing unit tests
 - Some documentation
 
 ### USPs planned:
-- Push notifications whenever new articles come out
+- Push notifications whenever new articles come out - Implemented on the client side using firebase.
 - WearOS integration
 
 
