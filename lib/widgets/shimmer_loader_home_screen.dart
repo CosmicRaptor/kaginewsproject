@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../util/shimmer_effects.dart';
 
@@ -78,9 +79,8 @@ Widget imageShimmer({
 }) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(10),
-    child: Image.network(
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) return child;
+    child: CachedNetworkImage(
+      placeholder: (context, url) {
         return Shimmer(
           linearGradient: shimmerGradient(context),
           child: ShimmerLoading(
@@ -89,8 +89,7 @@ Widget imageShimmer({
           ),
         );
       },
-      imgUrl,
-      semanticLabel: imgCaption,
+      imageUrl: imgUrl,
       fit: BoxFit.cover,
       width: width,
       height: height,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
 
@@ -21,7 +22,7 @@ class SourcesWidget extends StatelessWidget {
         return SizedBox(
           // width: 50,
           // height: 10,
-          child: Image.network(source.favicon, fit: BoxFit.fill),
+          child: CachedNetworkImage(imageUrl: source.favicon, fit: BoxFit.fill),
         );
       },
     );

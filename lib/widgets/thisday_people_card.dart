@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
@@ -22,6 +24,10 @@ class ThisdayPeopleCard extends ConsumerWidget {
             .watch(getWikipediaSummaryProvider(title))
             .when(
               error: (error, stacktrace) {
+                if (kDebugMode) {
+                  print(error.toString());
+                  print(stacktrace.toString());
+                }
                 return Center(child: Text(l10n.errorOccured));
               },
               loading:
@@ -57,8 +63,8 @@ class ThisdayPeopleCard extends ConsumerWidget {
                                 data.thumbnailUrl!.isNotEmpty)
                               CircleAvatar(
                                 radius: 20,
-                                child: Image.network(
-                                  data.thumbnailUrl!,
+                                child: CachedNetworkImage(
+                                  imageUrl: data.thumbnailUrl!,
                                   width: 50,
                                   height: 50,
                                   fit: BoxFit.cover,
