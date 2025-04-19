@@ -21,7 +21,7 @@ class HomeViewModel extends ChangeNotifier {
   AsyncValue<List<Category>> get categories =>
       ref.watch(getSavedCategoriesProvider);
 
-  AsyncValue<Object> getCategoryData(int index, String fileName) {
+  AsyncValue getCategoryData(String fileName) {
     return fileName != "onthisday.json"
         ? ref.watch(getCategoryProvider(fileName))
         : ref.watch(getOnThisDayProvider);

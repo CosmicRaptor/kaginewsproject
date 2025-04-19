@@ -94,7 +94,7 @@ class _TabContent extends ConsumerWidget {
       return const ShimmerLoaderHomeScreen(loadAppBar: false);
     }
 
-    final dataAsync = vm.getCategoryData(index, fileName);
+    final dataAsync = vm.getCategoryData(fileName);
 
     return dataAsync.when(
       loading: () => const ShimmerLoaderHomeScreen(loadAppBar: false),

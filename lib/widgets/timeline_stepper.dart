@@ -21,10 +21,13 @@ class TimelineStepper extends StatelessWidget {
             final stepArray = step.split('::');
             return ModifiedStep(
               title: Text(
-                stepArray[0],
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                stepArray[0].trim(),
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-              content: Text(stepArray[1]),
+              content: Text(
+                stepArray[1].trim(),
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
               isActive: true,
               state: ModifiedStepState.complete,
             );

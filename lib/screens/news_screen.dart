@@ -49,32 +49,40 @@ class NewsScreen extends StatelessWidget {
 
                   // Location
                   if (cluster.location.isNotEmpty)
-                    Row(
+                    Column(
                       children: [
-                        // Location icon
-                        Icon(
-                          Icons.location_on_outlined,
-                          size: 16,
-                          color: Colors.grey[600],
+                        Row(
+                          children: [
+                            // Location icon
+                            Icon(
+                              Icons.location_on_outlined,
+                              size: 16,
+                              color: Colors.grey[600],
+                            ),
+                            Text(
+                              cluster.location,
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          cluster.location,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.grey[600],
-                          ),
-                        ),
+                        const SizedBox(height: 24),
                       ],
                     ),
-                  const SizedBox(height: 24),
 
                   // Primary Image
                   if (cluster.articles[0].image.isNotEmpty)
-                    NewsImageWithCaption(article: cluster.articles[0]),
-                  const SizedBox(height: 30),
+                    Column(
+                      children: [
+                        NewsImageWithCaption(article: cluster.articles[0]),
+                        const SizedBox(height: 30),
+                      ],
+                    ),
 
                   // Highlights heading
                   Text(
@@ -130,25 +138,32 @@ class NewsScreen extends StatelessWidget {
                   // Quote card
                   if (cluster.quote.isNotEmpty &&
                       cluster.quoteAuthor.isNotEmpty)
-                    SizedBox(
-                      width: double.infinity,
-                      child: GeneralPurposeCard(
-                        title: cluster.quote,
-                        description: cluster.quoteAuthor,
-                        url: cluster.quoteSourceUrl,
-                        urlDomain: cluster.quoteSourceDomain,
-                      ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          child: GeneralPurposeCard(
+                            title: cluster.quote,
+                            description: cluster.quoteAuthor,
+                            url: cluster.quoteSourceUrl,
+                            urlDomain: cluster.quoteSourceDomain,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
                     ),
-                  const SizedBox(height: 16),
 
                   // Optional second image
                   if (cluster.articles.length > 1 &&
                       cluster.articles[1].image.isNotEmpty)
-                    NewsImageWithCaption(article: cluster.articles[1]),
-
-                  const SizedBox(height: 30),
-                  const Divider(),
-                  const SizedBox(height: 16),
+                    Column(
+                      children: [
+                        NewsImageWithCaption(article: cluster.articles[1]),
+                        const SizedBox(height: 30),
+                        const Divider(),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
 
                   // Perspectives
                   if (cluster.perspectives.isNotEmpty)
@@ -201,10 +216,9 @@ class NewsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 16),
                       ],
                     ),
-
-                  const SizedBox(height: 16),
 
                   // Historical background
                   if (cluster.historicalBackground.isNotEmpty)
@@ -225,10 +239,9 @@ class NewsScreen extends StatelessWidget {
                           cluster.historicalBackground,
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
+                        const SizedBox(height: 16),
                       ],
                     ),
-
-                  const SizedBox(height: 16),
 
                   // Humanitarian impact
                   if (cluster.humanitarianImpact.isNotEmpty)
@@ -249,10 +262,9 @@ class NewsScreen extends StatelessWidget {
                           cluster.humanitarianImpact,
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
+                        const SizedBox(height: 16),
                       ],
                     ),
-
-                  const SizedBox(height: 16),
 
                   // Technical details
                   if (cluster.technicalDetails.isNotEmpty)
@@ -378,8 +390,8 @@ class NewsScreen extends StatelessWidget {
                                       Theme.of(context).colorScheme.primary,
                                   spacing: 8,
                                 ),
-                                const Divider(),
-                                const SizedBox(height: 16),
+                                // const Divider(),
+                                // const SizedBox(height: 16),
                               ],
                             ),
                           );
@@ -392,6 +404,8 @@ class NewsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Divider(),
+                        const SizedBox(height: 16),
                         Text(
                           l10n.timeline,
                           style: Theme.of(
@@ -493,12 +507,11 @@ class NewsScreen extends StatelessWidget {
                                 ],
                               );
                             }),
+                            const SizedBox(height: 16),
                           ],
                         ),
                       ),
                     ),
-
-                  const SizedBox(height: 16),
 
                   // Footer
                   Row(
