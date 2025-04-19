@@ -50,7 +50,7 @@ Out of scope
 - Adding additional sources outside of Kite
 
 Some Guidelines
-= Do the project in a way that shows off your skills as a developer
+- Do the project in a way that shows off your skills as a developer
 - Deliverable is the completed project, in a github repo, deployed somewhere or a TestFlight / TestApp link to test it on mobile
 - Review and address flutter analyze and linter
 - Create a README file with setup instructions
@@ -94,12 +94,21 @@ https://github.com/user-attachments/assets/01362cd9-9917-4ef0-9bb0-c00d2f5cea8a
 
 https://github.com/user-attachments/assets/1abbf9a8-1bde-4b98-b65e-63018d0d22a4
 
+### 18 April 2025
+- Implemented caching for all pages(Users need to load a category at least once for all pages on it to be cached)
+- Uses etag and last-modified headers for determining if there's new content
+- greatly improves the responsiveness of the app
+- Video recorded with the internet connection turned off for the second half.
+
+
+
+https://github.com/user-attachments/assets/e309e778-1b70-4c0f-8c41-374d3507af9b
+
+
 
 
 
 ### What's left:
-- Improving the UI
-- Caching news for offline viewing
 - Writing unit tests
 - Some documentation
 
