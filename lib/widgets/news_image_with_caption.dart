@@ -22,10 +22,9 @@ class NewsImageWithCaption extends StatelessWidget {
         const SizedBox(height: 8),
         Text(
           article.imageCaption,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.grey[400],
-            fontStyle: FontStyle.italic,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.labelSmall!.copyWith(fontStyle: FontStyle.italic),
         ),
       ],
     );
