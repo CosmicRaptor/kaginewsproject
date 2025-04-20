@@ -72,20 +72,23 @@ class NewsScreen extends ConsumerWidget {
                                 color: Colors.grey[600],
                               ),
                             ),
-                            Expanded(child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.share),
-                                  color: Theme.of(context).colorScheme.primary,
-                                  iconSize: 20,
-                                  onPressed: (){
-                                    vm.shareArticle(category);
-                                  },
-                                  tooltip: 'Share',
-                                ),
-                              ],
-                            ))
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.share),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    iconSize: 20,
+                                    onPressed: () {
+                                      vm.shareArticle(category);
+                                    },
+                                    tooltip: 'Share',
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                         // const SizedBox(height: 24),

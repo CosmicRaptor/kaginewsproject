@@ -25,6 +25,9 @@ final onthisdayWikipediaTitleProvider = Provider.family<String?, String>((
 
 final homeVMProvider = ChangeNotifierProvider((ref) => HomeViewModel(ref));
 
-final newsVMProvider = Provider.family<NewsScreenViewmodel, NewsCluster>((ref, cluster){
+final newsVMProvider = Provider.family<NewsScreenViewmodel, NewsCluster>((
+  ref,
+  cluster,
+) {
   return NewsScreenViewmodel(cluster);
 });

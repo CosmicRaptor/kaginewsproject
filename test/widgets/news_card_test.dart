@@ -55,7 +55,9 @@ void main() {
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(body: NewsCard(newsCluster: testCluster, category: "Test",)),
+        home: Scaffold(
+          body: NewsCard(newsCluster: testCluster, category: "Test"),
+        ),
       ),
     );
 
@@ -70,7 +72,9 @@ void main() {
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: Scaffold(body: NewsCard(newsCluster: testCluster, category: "test",)),
+        home: Scaffold(
+          body: NewsCard(newsCluster: testCluster, category: "test"),
+        ),
       ),
     );
 
