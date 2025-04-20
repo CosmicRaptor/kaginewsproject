@@ -70,6 +70,15 @@ Some Guidelines
 - Users can choose what categories they wish to see, and reorder them just like the website.
 - App has well written tests and comments in the code wherever required.
 
+
+https://github.com/user-attachments/assets/f18f0a69-fa0b-46b6-869e-9124684e3523
+
+
+https://github.com/user-attachments/assets/8b9f5f9e-3d57-4b5c-a88b-fc679c3d6e61
+
+
+
+
 # Progress milestones
 ### 09 April 2025
 - Basic MVVM architecture laid out, models created
