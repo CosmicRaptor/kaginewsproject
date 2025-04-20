@@ -56,6 +56,20 @@ Some Guidelines
 - Create a README file with setup instructions
 - Make sure to include screenshots or videos of the completed application
 
+## My solution
+- Has appropriate haptic feedback.
+- Notifications using firebase, to alert users when new articles come out(Needs server side integration)
+- All viewed categories are cached for offline viewing. (Uses the HTTP etag and last-modified headers under the hood for a custom caching solution)
+- Loads cache by default to save bandwidth and API calls.
+- Cache is automatically invalidated if the etag of the remote changes.
+- Sane MVVM architecture, with riverpod for state management.
+- Shimmer loading UI.
+- Custom onboarding screen to give a good first impression to the users.
+- Automatic light and dark modes.
+- Yellow color scheme to match the Kite icon.
+- Users can choose what categories they wish to see, and reorder them just like the website.
+- App has well written tests and comments in the code wherever required.
+
 # Progress milestones
 ### 09 April 2025
 - Basic MVVM architecture laid out, models created
