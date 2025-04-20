@@ -47,10 +47,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'news',
                 pageBuilder: (context, state) {
-                  final cluster = state.extra as NewsCluster;
+                  final inputL = state.extra as List;
+                  final cluster = inputL[0] as NewsCluster;
+                  final category = inputL[1] as String;
                   return CustomTransitionPage(
                     key: state.pageKey,
-                    child: NewsScreen(cluster: cluster),
+                    child: NewsScreen(cluster: cluster, category: category),
                     transitionsBuilder: (
                       context,
                       animation,

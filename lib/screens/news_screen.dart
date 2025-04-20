@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kaginewsproject/providers/viewmodel_providers.dart';
 
 import '../l10n/l10n.dart';
 import '../models/category_articles_stuff.dart';
@@ -10,14 +12,15 @@ import '../widgets/bullet_point.dart';
 import '../widgets/dashed_line_divider.dart';
 import '../widgets/sources_widget.dart';
 
-class NewsScreen extends StatelessWidget {
+class NewsScreen extends ConsumerWidget {
   final NewsCluster cluster;
-  const NewsScreen({super.key, required this.cluster});
+  final String category;
+  const NewsScreen({super.key, required this.cluster, required this.category});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-
+    final vm = ref.watch(newsVMProvider(cluster));
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.news, style: Theme.of(context).textTheme.titleLarge),
@@ -45,7 +48,7 @@ class NewsScreen extends StatelessWidget {
                     cluster.shortSummary,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  const SizedBox(height: 10),
+                  // const SizedBox(height: 10),
 
                   // Location
                   if (cluster.location.isNotEmpty)
@@ -69,9 +72,23 @@ class NewsScreen extends StatelessWidget {
                                 color: Colors.grey[600],
                               ),
                             ),
+                            Expanded(child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.share),
+                                  color: Theme.of(context).colorScheme.primary,
+                                  iconSize: 20,
+                                  onPressed: (){
+                                    vm.shareArticle(category);
+                                  },
+                                  tooltip: 'Share',
+                                ),
+                              ],
+                            ))
                           ],
                         ),
-                        const SizedBox(height: 24),
+                        // const SizedBox(height: 24),
                       ],
                     ),
 

@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kaginewsproject/models/category_articles_stuff.dart';
 import 'package:kaginewsproject/models/onthisday_model.dart';
+import 'package:kaginewsproject/viewmodels/news_screen_viewmodel.dart';
 
 import '../viewmodels/home_screen_viewmodel.dart';
 import '../viewmodels/onthisday_viewmodel.dart';
@@ -22,3 +24,7 @@ final onthisdayWikipediaTitleProvider = Provider.family<String?, String>((
 });
 
 final homeVMProvider = ChangeNotifierProvider((ref) => HomeViewModel(ref));
+
+final newsVMProvider = Provider.family<NewsScreenViewmodel, NewsCluster>((ref, cluster){
+  return NewsScreenViewmodel(cluster);
+});

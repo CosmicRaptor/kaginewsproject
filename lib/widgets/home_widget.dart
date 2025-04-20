@@ -14,7 +14,7 @@ class HomeWidget extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        ...detail.clusters.map((cluster) => NewsCard(newsCluster: cluster)),
+        ...detail.clusters.map((cluster) => NewsCard(newsCluster: cluster, category: detail.category,)),
         // Footer
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

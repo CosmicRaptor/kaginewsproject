@@ -6,7 +6,8 @@ import 'package:kaginewsproject/widgets/shimmer_loader.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsCluster newsCluster;
-  const NewsCard({super.key, required this.newsCluster});
+  final String category;
+  const NewsCard({super.key, required this.newsCluster, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,7 @@ class NewsCard extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            context.push('/news/', extra: newsCluster);
+                            context.push('/news/', extra: [newsCluster, category]);
                           },
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
