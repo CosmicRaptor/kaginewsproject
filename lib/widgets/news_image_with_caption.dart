@@ -10,22 +10,25 @@ class NewsImageWithCaption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: imageShimmer(
-            width: double.infinity,
-            height: 200,
-            imgUrl: article.image,
-            imgCaption: article.imageCaption,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: imageShimmer(
+              width: double.infinity,
+              height: 200,
+              imgUrl: article.image,
+              imgCaption: article.imageCaption,
+            ),
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          article.imageCaption,
-          style: Theme.of(
-            context,
-          ).textTheme.labelSmall!.copyWith(fontStyle: FontStyle.italic),
-        ),
+        if (article.imageCaption.isNotEmpty)
+          Text(
+            article.imageCaption,
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall!.copyWith(fontStyle: FontStyle.italic),
+          ),
       ],
     );
   }

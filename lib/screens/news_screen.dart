@@ -21,6 +21,7 @@ class NewsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final vm = ref.watch(newsVMProvider(cluster));
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.news, style: Theme.of(context).textTheme.titleLarge),
@@ -52,47 +53,92 @@ class NewsScreen extends ConsumerWidget {
 
                   // Location
                   if (cluster.location.isNotEmpty)
-                    Column(
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        Row(
-                          children: [
-                            // Location icon
-                            Icon(
-                              Icons.location_on_outlined,
-                              size: 16,
+                        // Location icon
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 16,
+                          color: Colors.grey[600],
+                        ),
+                        SizedBox(
+                          width: width * 0.7,
+                          child: Text(
+                            cluster.location,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.italic,
                               color: Colors.grey[600],
                             ),
-                            Text(
-                              cluster.location,
-                              style: Theme.of(
-                                context,
-                              ).textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontStyle: FontStyle.italic,
-                                color: Colors.grey[600],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.share),
+                                color: Theme.of(context).colorScheme.primary,
+                                iconSize: 20,
+                                onPressed: () {
+                                  vm.shareArticle(category);
+                                },
+                                tooltip: 'Share',
                               ),
-                            ),
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.share),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+
+                  if (cluster.location.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: MaterialButton(
+                        onPressed: () {
+                          vm.shareArticle(category);
+                        },
+                        splashColor: Colors.transparent, // Disble splash
+                        elevation: 0,
+                        padding: EdgeInsets.zero,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer
+                                .withValues(alpha: 0.5),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.share,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  l10n.share,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodyMedium?.copyWith(
                                     color:
                                         Theme.of(context).colorScheme.primary,
-                                    iconSize: 20,
-                                    onPressed: () {
-                                      vm.shareArticle(category);
-                                    },
-                                    tooltip: 'Share',
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                        // const SizedBox(height: 24),
-                      ],
+                      ),
                     ),
 
                   // Primary Image
@@ -176,13 +222,9 @@ class NewsScreen extends ConsumerWidget {
                   // Optional second image
                   if (cluster.articles.length > 1 &&
                       cluster.articles[1].image.isNotEmpty)
-                    Column(
-                      children: [
-                        NewsImageWithCaption(article: cluster.articles[1]),
-                        const SizedBox(height: 30),
-                        const Divider(),
-                        const SizedBox(height: 16),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: NewsImageWithCaption(article: cluster.articles[1]),
                     ),
 
                   // Perspectives

@@ -22,7 +22,8 @@
     "welcomeText",
     "welcomeDescription",
     "settingsReorderText",
-    "settingsPageTitle"
+    "settingsPageTitle",
+    "share"
   ],
 
   "hi": [
@@ -48,6 +49,7 @@
     "welcomeText",
     "welcomeDescription",
     "settingsReorderText",
-    "settingsPageTitle"
+    "settingsPageTitle",
+    "share"
   ]
 }

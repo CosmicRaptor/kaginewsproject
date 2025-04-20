@@ -21,5 +21,6 @@
   "welcomeText": "Welcome to Kite",
   "welcomeDescription": "Find news from every source you can imagine, condensed into a single feed.",
   "settingsReorderText": "Tap to toggle. Drag enabled categories to reorder.",
-  "settingsPageTitle": "Settings"
+  "settingsPageTitle": "Settings",
+  "share": "Share"
 }
