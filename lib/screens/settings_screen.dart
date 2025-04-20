@@ -5,7 +5,7 @@ import 'package:reorderables/reorderables.dart';
 
 import '../providers/api_provider.dart';
 import '../providers/storage_providers.dart';
-import '../widgets/shimmer_loader_home_screen.dart';
+import '../widgets/shimmer_loader.dart';
 import '../models/categories_model.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {

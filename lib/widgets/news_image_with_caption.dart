@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/category_articles_stuff.dart';
-import 'shimmer_loader_home_screen.dart';
+import 'shimmer_loader.dart';
 
 class NewsImageWithCaption extends StatelessWidget {
   final NewsArticle article;

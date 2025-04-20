@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kaginewsproject/l10n/l10n.dart';
 import 'package:kaginewsproject/models/category_articles_stuff.dart';
-import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
+import 'package:kaginewsproject/widgets/shimmer_loader.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsCluster newsCluster;

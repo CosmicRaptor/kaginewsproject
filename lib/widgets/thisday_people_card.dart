@@ -7,7 +7,7 @@ import 'package:kaginewsproject/models/onthisday_model.dart';
 import 'package:kaginewsproject/providers/api_provider.dart';
 import 'package:kaginewsproject/providers/viewmodel_providers.dart';
 import 'package:kaginewsproject/util/shimmer_effects.dart';
-import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
+import 'package:kaginewsproject/widgets/shimmer_loader.dart';
 
 class ThisdayPeopleCard extends ConsumerWidget {
   final OnThisDayEvent event;

@@ -6,7 +6,7 @@ import 'package:kaginewsproject/models/category_articles_stuff.dart';
 import 'package:kaginewsproject/models/onthisday_model.dart';
 import 'package:kaginewsproject/widgets/home_widget.dart';
 import 'package:kaginewsproject/widgets/onthisday_widget.dart';
-import 'package:kaginewsproject/widgets/shimmer_loader_home_screen.dart';
+import 'package:kaginewsproject/widgets/shimmer_loader.dart';
 import '../providers/viewmodel_providers.dart';
 import '../util/scroll_haptics.dart';
 
