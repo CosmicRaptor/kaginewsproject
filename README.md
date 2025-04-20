@@ -128,13 +128,6 @@ https://github.com/user-attachments/assets/1abbf9a8-1bde-4b98-b65e-63018d0d22a4
 https://github.com/user-attachments/assets/e309e778-1b70-4c0f-8c41-374d3507af9b
 
 
-
-
-
-### What's left:
-- Writing unit tests
-- Some documentation
-
 ### USPs planned:
 - Push notifications whenever new articles come out - Implemented on the client side using firebase.
 - WearOS integration
