@@ -63,6 +63,7 @@ Some Guidelines
 - Loads cache by default to save bandwidth and API calls.
 - Cache is automatically invalidated if the etag of the remote changes.
 - Sane MVVM architecture, with riverpod for state management.
+- Support for localisation built in.
 - Shimmer loading UI.
 - Custom onboarding screen to give a good first impression to the users.
 - Automatic light and dark modes.
